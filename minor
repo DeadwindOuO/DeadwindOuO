@@ -1,0 +1,110 @@
+#include <iostream>    
+#include <string>    
+#include <math.h>
+using namespace std;
+int traStN(string a) {
+    int NUM = 0;
+    for (int i = 0; i < a.size(); i++) {
+        switch (char(a[i])) {
+        case 'I': switch (char(a[i + 1])) {
+        case 'V': NUM += 4; i++; break;
+        case 'X': NUM += 9; i++; break;
+        default: NUM += 1; break;
+        }break;
+        case 'V': NUM += 5; break;
+        case 'X': switch (char(a[i + 1])) {
+        case 'L':NUM += 40; i++; break;
+        case 'C':NUM += 90; i++; break;
+        default: NUM += 10; break;
+        }break;
+        case'L': NUM += 50; break;
+        case'C': switch (char(a[i + 1])) {
+        case'D':NUM += 400; i++; break;
+        case'M':NUM += 900; i++; break;
+        default:NUM += 100; break;
+        }break;
+        case'D':NUM += 500; break;
+        case'M':NUM += 1000; break;
+        default: break;
+        }
+    }
+    return NUM;
+}
+string traNtS(int b) {
+    string STR = "";
+    switch (b % 10) {
+    case 0 :break;
+    case 1 :STR = "I" + STR; break;
+    case 2 :STR = "II" + STR; break;
+    case 3 :STR = "III" + STR; break;
+    case 4 :STR = "IV" + STR; break;
+    case 5 :STR = "V" + STR; break;
+    case 6 :STR = "VI" + STR; break;
+    case 7 :STR = "VII" + STR; break;
+    case 8 :STR = "VIII" + STR; break;
+    case 9 :STR = "IX" + STR; break;
+    default: break;
+    }
+    switch ((b / 10) % 10) {
+    case 0 :break;
+    case 1 :STR = "X" + STR; break;
+    case 2 :STR = "XX" + STR; break;
+    case 3 :STR = "XXX" + STR; break;
+    case 4 :STR = "XL" + STR; break;
+    case 5 :STR = "L" + STR; break;
+    case 6 :STR = "LX" + STR; break;
+    case 7 :STR = "LXX" + STR; break;
+    case 8 :STR = "LXXX" + STR; break;
+    case 9 :STR = "XC" + STR; break;
+    default: break;
+    }
+    switch ((b / 100) % 10) {
+    case 0 :break;
+    case 1 :STR = "C" + STR; break;
+    case 2 :STR = "CC" + STR; break;
+    case 3 :STR = "CCC" + STR; break;
+    case 4 :STR = "CD" + STR; break;
+    case 5 :STR = "D" + STR; break;
+    case 6 :STR = "DC" + STR; break;
+    case 7 :STR = "DCC" + STR; break;
+    case 8 :STR = "DCCC" + STR; break;
+    case 9 :STR = "CM" + STR; break;
+    default: break;
+    }
+    switch ((b / 1000) % 10) {
+    case 0 :break;
+    case 1 :STR = "M" + STR; break;
+    case 2 :STR = "MM" + STR; break;
+    case 3 :STR = "MMM" + STR; break;
+    default: break;
+    }
+    return STR;
+}
+int main() {
+    int a, b, c;
+    string STRa, STRb, Ans;
+    while (cin >> STRa) {
+        if (STRa.at(0) == '#') {
+            break;
+        }
+        cin >> STRb;
+        a = traStN(STRa);
+        b = traStN(STRb);
+        if (a > b) {
+            c = a - b;
+            Ans += traNtS(c) + "\n";
+        }
+        else if (a < b) {
+            c = b - a;
+            Ans += traNtS(c) + "\n";
+        }
+        else if (a == b) {
+            Ans += "ZERO\n";
+        }
+    }
+    cout << Ans;
+}
+
+
+
+
